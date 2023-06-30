@@ -1,5 +1,7 @@
 package dev.lpa;
 
+import dev.lpa.util.QueryList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +16,14 @@ public class Main {
         }
         students.add(new LPAStudent());
 //        printList(students);
-        printMoreList(students);
+        printMoreLists(students);
 
         List<LPAStudent> lpaStudents = new ArrayList<>();
         for (int i = 0; i < studentCount; i++) {
             lpaStudents.add(new LPAStudent());
         }
 //        printList(lpaStudents);
-        printMoreList(lpaStudents);
+        printMoreLists(lpaStudents);
 //                2021: Tim E           C++             2021     35,2%
 //                2018: Tim P           Python          2018     50,0%
 //                2022: Tim X           Python          2022     97,1%
@@ -41,13 +43,27 @@ public class Main {
 //        Integer: 1.0
 //        Integer: 2.0
 //        Integer: 3.0
+
+        var queryList = new QueryList<>(lpaStudents);
+        var matches = queryList.getMatches(
+                "Course", "Python");
+        printMoreLists(matches);
+//        Bill K          Python          2021     78,8%
+//        Tim U           Python          2019     91,5%
+
+        var students2021 = QueryList.getMatches(students, "YearStarted", "2021");
+        printMoreLists(students2021);
+//        Ann W           C++             2021
+//        John Z          C++             2021
+
+//        QueryList<Employee> employeeList = new QueryList<>();
     }
 
-    public static void printMoreList(List<? extends Student> students) {
+    public static void printMoreLists(List<? extends Student> students) {
 
 
         for (var student : students) {
-            System.out.println(student + ": " + student);
+            System.out.println(student);
         }
         System.out.println();
     }
